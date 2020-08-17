@@ -8,10 +8,10 @@ var svg = d3.select(mapCanvas).append('svg')
 var mapWidth = +svg.attr("width"),
     mapHeight = +svg.attr("height");
 var projection = d3.geoMercator()
-    .center([0, 0])
-    .scale(100)
+    .center([10.015, 48.355])
+    .scale(200000)
     .translate([mapWidth / 2, mapHeight / 2])
-d3.json("https://raw.githubusercontent.com/TheFloTheGame/Ulm-Baum/master/data/ulm.geojson?token=AMWD4TVVWY3X7EZCBJAFBU27HHN5K", function(data){
+d3.json("https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/ulm.geojson").then(function(data){
     svg.append("g")
         .selectAll("path")
         .data(data.features)
