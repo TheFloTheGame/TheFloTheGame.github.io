@@ -11,7 +11,7 @@ var projection = d3.geoMercator()
     .center([0, 0])
     .scale(100)
     .translate([mapWidth / 2, mapHeight / 2])
-d3.json("https://raw.githubusercontent.com/TheFloTheGame/Ulm-Baum/master/data/ulm.geojson?token=AMWD4TVCSHNZUV2XRTRM3JS7HHNT6", function(data){
+d3.json("https://raw.githubusercontent.com/TheFloTheGame/Ulm-Baum/master/data/ulm.geojson?token=AMWD4TVVWY3X7EZCBJAFBU27HHN5K", function(data){
     svg.append("g")
         .selectAll("path")
         .data(data.features)
