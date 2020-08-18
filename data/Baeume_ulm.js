@@ -111947,7 +111947,7 @@ let data_baeume = [
    "Anzeigename": "110 010Y0506 2079 1 Pterocarya species -",
    "Standort_Nr_lfdNr": 2079,
    "Baumart_botanisch": "Pterocarya species",
-   "Baumart": "",
+   "Baumart": "Flügelnuss",
    "Baumhoehe_aktuell": 13.5,
    "Kronendurchm_aktuell": 8,
    "Stammumfang_aktuell": 73.83,

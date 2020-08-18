@@ -31,6 +31,12 @@ var points = [
     {long: 9.968, lat: 48.329}, // Unterweiler
     {long: 9.936, lat: 48.322}, // Donaustetten
 ];
+var baumKategoriesBot = d3.map(d3.merge([data_baeume, data_naturdenkmal]), d => d.Baumart_botanisch).keys().sort();
+for (let index = 0; index < baumKategoriesBot.length; index++) {
+    baumKategoriesBot[index] = baumKategoriesBot[index].split(" ")[0];
+}
+baumKategoriesBot = d3.map(baumKategoriesBot, d => d).keys();
+const baumKategories = d3.map(d3.merge([data_baeume, data_naturdenkmal]), d => d.Baumart).keys();
 d3.json("https://raw.githubusercontent.com/TheFloTheGame/Ulm-Baum/master/data/ulm.geojson").then(function(data){
     svg.append("g")
         .selectAll("path")
@@ -44,8 +50,8 @@ d3.json("https://raw.githubusercontent.com/TheFloTheGame/Ulm-Baum/master/data/ul
         .data(points)
         .enter()
         .append("circle")
-            .attr("cx", function(d){ return projection([d.long, d.lat])[0]})
-            .attr("cy", function(d){ return projection([d.long, d.lat])[1]})
+            .attr("cx", d => projection([d.long, d.lat])[0])
+            .attr("cy", d => projection([d.long, d.lat])[1])
             .attr("r", 5) //TODO: change size depending on data
             .style("fill", "green"); //TODO: change color depending on data
 });
