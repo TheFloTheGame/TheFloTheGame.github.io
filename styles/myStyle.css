@@ -322,7 +322,31 @@ p
 
 #infoButton
 {
+    position: fixed;
+    right: 10%;
+    bottom: 50%;
+    -webkit-filter: brightness(100%);
+}
 
+#infoButton:hover
+{
+    -webkit-filter: brightness(70%);
+}
+
+#static .active
+{
+    -webkit-filter: brightness(80%);
+}
+
+#staticInfo
+{
+    top: 50px;
+    right: 20%;
+    position: absolute;
+    background: #FFFFFF;
+    padding: 20px;
+    border: 1px solid #707070;
+    display: none;
 }
 
 #vermin

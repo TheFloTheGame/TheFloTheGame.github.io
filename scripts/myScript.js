@@ -27,7 +27,7 @@ const TreeBotNames = [
     "Pinus",
     "Taxus",
     "Tilia",
-    "Acer",
+    "Fraxinus",
     "Styphnolobium",
     "Robinia",
     "Salix",
@@ -204,9 +204,9 @@ function changeTree(n)
     for (let i = 0; i < treeP.length; i++) {
         treeP[i].innerHTML = TreeNames[n];
     }
-    count.innerHTML = treeData.filter(d => new RegExp(TreeBotNames[n], "i").exec(d.Baumart_botanisch) != null).length;
-    countProtected.innerHTML = data_naturdenkmal.filter(d => new RegExp(TreeBotNames[n], "i").exec(d.Baumart_botanisch) != null).length;
-    var typesT = d3.map(treeData.filter(d => new RegExp(TreeBotNames[n], "i").exec(d.Baumart_botanisch) != null), d => d.Baumart).keys();
+    count.innerHTML = treeData.filter(d => new RegExp(TreeBotNames[n]).exec(d.Baumart_botanisch) != null).length;
+    countProtected.innerHTML = data_naturdenkmal.filter(d => new RegExp(TreeBotNames[n]).exec(d.Baumart_botanisch) != null).length;
+    var typesT = d3.map(treeData.filter(d => new RegExp(TreeBotNames[n]).exec(d.Baumart_botanisch) != null), d => d.Baumart).keys();
     var typesStr = "";
     typesT.forEach((element, i) => {
         if(i < typesT.length - 2)
@@ -230,7 +230,7 @@ function changeTree(n)
         status[i] = 0;
     }
     for (let i = 0; i < filteredBy.length; i++) {
-        filteredBy[i] = treeDataDistrict[i].filter(d => new RegExp(TreeBotNames[n], "i").exec(d.Baumart_botanisch) != null);
+        filteredBy[i] = treeDataDistrict[i].filter(d => new RegExp(TreeBotNames[n]).exec(d.Baumart_botanisch) != null);
         filteredBy[i].forEach(value => {
             if(value.Vitalitaetsstatus_aktuell.substring(0, 1) != "")
             {
@@ -379,5 +379,21 @@ function drawMap(n, f)
                 .data(points)
                 .attr("r", function(d){ if(d[2] != -1){ return crownScale(d[2]) } return 0 });
             break;
+    }
+}
+
+function toggleStaticInfo()
+{
+    var staticInfo = document.getElementById("staticInfo");
+    var infoButton = document.getElementById("infoButton");
+    if(infoButton.className === "active")
+    {
+        staticInfo.style.display = "none";
+        infoButton.className = infoButton.className.replace("active", "");
+    }
+    else
+    {
+        staticInfo.style.display = "block";
+        infoButton.className += "active";
     }
 }
