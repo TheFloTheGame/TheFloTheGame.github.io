@@ -209,20 +209,17 @@ function changeTree(n)
     var typesT = d3.map(treeData.filter(d => new RegExp(TreeBotNames[n], "i").exec(d.Baumart_botanisch) != null), d => d.Baumart).keys();
     var typesStr = "";
     typesT.forEach((element, i) => {
-        if(element != TreeNamesS[n])
+        if(i < typesT.length - 2)
         {
-            if(i < typesT.length - 2)
-            {
-                typesStr += element + ", "
-            }
-            else if(i < typesT.length - 1)
-            {
-                typesStr += element + " und "
-            }
-            else
-            {
-                typesStr += element;
-            }
+            typesStr += element + ", "
+        }
+        else if(i < typesT.length - 1)
+        {
+            typesStr += element + " und "
+        }
+        else
+        {
+            typesStr += element;
         }
     });
     types.innerHTML = typesStr;
