@@ -13,6 +13,7 @@
   <link href="./libs/style/skeleton.css" rel="stylesheet" type="text/css" />
   <link href="./styles/myStyle.css" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Eczar&family=Rubik&display=swap" rel="stylesheet">
 
   <!-- Scripts -->
   <script src="https://d3js.org/d3.v5.js"></script>
@@ -34,35 +35,37 @@
     </div>
   </div>
   <div id="nav">
-    <ul>
-      <li onclick="changeFamily(0)" class="menu active">
-        Rosenartige
-      </li>
-      <li onclick="changeFamily(1)" class="menu">
-        Koniferen
-      </li>
-      <li onclick="changeFamily(2)" class="menu">
-        Malvenartige
-      </li>
-      <li onclick="changeFamily(3)" class="menu">
-        Lippenblütlerartige
-      </li>
-      <li onclick="changeFamily(4)" class="menu">
-        Schmetterlingsblütenartige
-      </li>
-      <li onclick="changeFamily(5)" class="menu">
-        Malpighienartige
-      </li>
-      <li onclick="changeFamily(6)" class="menu">
-        Buchenartige
-      </li>
-      <li onclick="changeFamily(7)" class="menu">
-        Seifenbaumartige
-      </li>
-      <li onclick="changeFamily(8)" class="menu">
-        Silberbaumartige
-      </li>
-    </ul>
+    <div id="family">
+      <ul>
+        <li onclick="changeFamily(0)" class="menu active">
+          Rosenartige
+        </li>
+        <li onclick="changeFamily(1)" class="menu">
+          Koniferen
+        </li>
+        <li onclick="changeFamily(2)" class="menu">
+          Malvenartige
+        </li>
+        <li onclick="changeFamily(3)" class="menu">
+          Lippenblütlerartige
+        </li>
+        <li onclick="changeFamily(4)" class="menu">
+          Schmetterlingsblütenartige
+        </li>
+        <li onclick="changeFamily(5)" class="menu">
+          Malpighienartige
+        </li>
+        <li onclick="changeFamily(6)" class="menu">
+          Buchenartige
+        </li>
+        <li onclick="changeFamily(7)" class="menu">
+          Seifenbaumartige
+        </li>
+        <li onclick="changeFamily(8)" class="menu">
+          Silberbaumartige
+        </li>
+      </ul>
+    </div>
     <div id="arrow">&#10095;</div>
     <ul>
       <li onclick="changeTree(0)" class="menuTree num0">
@@ -187,6 +190,9 @@
     </ul>
   </div>
   <div id="map">
+    <div id="mapCanvas">
+
+    </div>
     <div id="legend">
       <ul>
         <li><div id="square0"></div>Gesund</li>
@@ -195,9 +201,6 @@
         <li><div id="square3"></div>Stark beschädigt</li>
         <li><div id="square4"></div>Sehr stark beschädigt</li>
       </ul>
-    </div>
-    <div id="mapCanvas">
-
     </div>
   </div>
   <div id="static">

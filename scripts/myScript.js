@@ -70,6 +70,32 @@ const TreeNames = [
     "Platanen"
 ]
 
+const TreeNamesS = [
+    "Ulme",
+    "Mehlbeere",
+    "Weißdorne",
+    "Birne",
+    "Prunus",
+    "Kiefer",
+    "Eibe",
+    "Linde",
+    "Esche",
+    "Japanischer Schnurbaum",
+    "Robinie",
+    "Weide",
+    "Pappel",
+    "Eiche",
+    "Buche",
+    "Erle",
+    "Birke",
+    "Hainbuche",
+    "Hasel",
+    "Flügelnuss",
+    "Ahorn",
+    "Rosskastanie",
+    "Platane"
+]
+
 const districtArea = [
     5.59,    //Lehr
     14,   //Jungingen
@@ -183,21 +209,24 @@ function changeTree(n)
     var typesT = d3.map(treeData.filter(d => new RegExp(TreeBotNames[n], "i").exec(d.Baumart_botanisch) != null), d => d.Baumart).keys();
     var typesStr = "";
     typesT.forEach((element, i) => {
-        if(i < typesT.length - 2)
+        if(element != TreeNamesS[n])
         {
-            typesStr += element + ", "
-        }
-        else if(i < typesT.length - 1)
-        {
-            typesStr += element + " und "
-        }
-        else
-        {
-            typesStr += element;
+            if(i < typesT.length - 2)
+            {
+                typesStr += element + ", "
+            }
+            else if(i < typesT.length - 1)
+            {
+                typesStr += element + " und "
+            }
+            else
+            {
+                typesStr += element;
+            }
         }
     });
     types.innerHTML = typesStr;
-    treeT.innerHTML = TreeNames[n];
+    treeT.innerHTML = TreeNamesS[n];
 
     //Change tree value
     for (let i = 0; i < status.length; i++) {

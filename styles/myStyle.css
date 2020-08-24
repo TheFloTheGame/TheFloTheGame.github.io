@@ -1,7 +1,8 @@
 body
 {
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-family: 'Rubik', sans-serif;
 }
 
 #header
@@ -12,7 +13,7 @@ body
 h1
 {
     color: #619D5D;
-    font-weight: bold;
+    font-weight: 900;
     font-size: 72pt;
     z-index: 1;
 }
@@ -55,8 +56,8 @@ h1
 {
     border-left: 1px solid #707070;
     border-right: 1px solid #707070;
-    padding-left: 3px;
-    padding-right: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-top: 3px;
     float: right;
 }
@@ -65,14 +66,16 @@ h1
 {
     margin-top: 75px;
     font-size: 20px;
-    font-weight: normal;
+    font-weight: 600;
     background: none;
     color: #707070;
 }
 
-#nav ul
+#nav #family ul
 {
-    
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 #nav li
@@ -82,10 +85,12 @@ h1
 
 #nav .menu
 {
-    font-weight: normal;
+    font-weight: 600;
     background: none;
     color: #707070;
     padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
     cursor: pointer;
 }
 
@@ -96,10 +101,12 @@ h1
 
 #nav .menuTree
 {
-    font-weight: normal;
+    font-weight: 600;
     background: none;
     color: #707070;
     padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
     cursor: pointer;
     display: none;
 }
@@ -113,7 +120,7 @@ h1
 {
     background-color: rgba(46, 138, 40, 0.3);
     color: #1D5719;
-    font-weight: bold;
+    font-weight: 900;
 }
 
 #nav .active:hover
@@ -130,12 +137,15 @@ h1
 
 #tree
 {
-
+    margin-top: 50px;
+    display: flex;
 }
 
 #data
 {
-
+    width: 800px;
+    height: 500px;
+    background: black;
 }
 
 #info
@@ -147,7 +157,7 @@ h2
 {
     color: #619D5D;
     font-size: 36px;
-    font-weight: bold;
+    font-weight: 900;
 }
 
 #treeT
@@ -157,31 +167,34 @@ h2
 
 p
 {
+    margin-top: 30px;
     color: #707070;
     font-size: 20px;
+    width: 600px;
+    font-family: 'Eczar', serif;
 }
 
 #count
 {
     color: #2E8A28;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 #countProtected
 {
     color: #2E8A28;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 #types
 {
     color: #2E8A28;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 #filter
 {
-
+    margin-top: 20px;
 }
 
 #filter ul
@@ -196,12 +209,13 @@ p
 
 #filter .filterButton
 {
-    font-weight: normal;
+    font-weight: 600;
     font-size: 20px;
     background: none;
     color: #707070;
     padding: 3px;
-    padding-left: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
     cursor: pointer;
 }
 
@@ -214,7 +228,7 @@ p
 {
     background-color: rgba(46, 138, 40, 0.3);
     color: #1D5719;
-    font-weight: bold;
+    font-weight: 900;
 }
 
 #filter .active:hover
@@ -231,7 +245,7 @@ p
 
 #map
 {
-
+    display: flex;
 }
 
 #mapCanvas
@@ -241,7 +255,6 @@ p
 
 #legend
 {
-    float: right;
     font-size: 20px;
     color: #707070;
 }
