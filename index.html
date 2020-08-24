@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Bäume in Ulm</title>
+  <title>Ulmer Bäume</title>
 
   <!-- Stylesheets -->
   <link href="./libs/style/normalize.css" rel="stylesheet" type="text/css" />
@@ -24,28 +24,203 @@
 </head>
 
 <body>
+  <div id="header">
+    <h1>Ulmer Bäume</h1>
+    <div id="search">
+      <div id="searchButton">
+        <img src="assets/searchIcon.svg" width="32px"/>
+      </div>
+      <input type='text' placeholder='Suche...' id='search-text-input' />
+    </div>
+  </div>
   <div id="nav">
-
+    <ul>
+      <li onclick="changeFamily(0)" class="menu active">
+        Rosenartige
+      </li>
+      <li onclick="changeFamily(1)" class="menu">
+        Koniferen
+      </li>
+      <li onclick="changeFamily(2)" class="menu">
+        Malvenartige
+      </li>
+      <li onclick="changeFamily(3)" class="menu">
+        Lippenblütlerartige
+      </li>
+      <li onclick="changeFamily(4)" class="menu">
+        Schmetterlingsblütenartige
+      </li>
+      <li onclick="changeFamily(5)" class="menu">
+        Malpighienartige
+      </li>
+      <li onclick="changeFamily(6)" class="menu">
+        Buchenartige
+      </li>
+      <li onclick="changeFamily(7)" class="menu">
+        Seifenbaumartige
+      </li>
+      <li onclick="changeFamily(8)" class="menu">
+        Silberbaumartige
+      </li>
+    </ul>
+    <div id="arrow">&#10095;</div>
+    <ul>
+      <li onclick="changeTree(0)" class="menuTree num0">
+        Ulmen
+      </li>
+      <li onclick="changeTree(1)" class="menuTree num0">
+        Mehlbeeren
+      </li>
+      <li onclick="changeTree(2)" class="menuTree num0">
+        Weißdornen
+      </li>
+      <li onclick="changeTree(3)" class="menuTree num0">
+        Birnen
+      </li>
+      <li onclick="changeTree(4)" class="menuTree num0">
+        Prunus
+      </li>
+    </ul>
+    <ul>
+      <li onclick="changeTree(5)" class="menuTree num1">
+        Kiefern
+      </li>
+      <li onclick="changeTree(6)" class="menuTree num1">
+        Eiben
+      </li>
+    </ul>
+    <ul>
+      <li onclick="changeTree(7)" class="menuTree num2">
+        Linden
+      </li>
+    </ul>
+    <ul>
+      <li onclick="changeTree(8)" class="menuTree num3">
+        Eschen
+      </li>
+    </ul>
+    <ul>
+      <li onclick="changeTree(9)" class="menuTree num4">
+        Japanische Schnurbäume
+      </li>
+      <li onclick="changeTree(10)" class="menuTree num4">
+        Robinien
+      </li>
+    </ul>
+    <ul>
+      <li onclick="changeTree(11)" class="menuTree num5">
+        Weiden
+      </li>
+      <li onclick="changeTree(12)" class="menuTree num5">
+        Pappeln
+      </li>
+    </ul>
+    <ul>
+      <li onclick="changeTree(13)" class="menuTree num6">
+        Eichen
+      </li>
+      <li onclick="changeTree(14)" class="menuTree num6">
+        Buchen
+      </li>
+      <li onclick="changeTree(15)" class="menuTree num6">
+        Erlen
+      </li>
+      <li onclick="changeTree(16)" class="menuTree num6">
+        Birken
+      </li>
+      <li onclick="changeTree(17)" class="menuTree num6">
+        Hainbuchen
+      </li>
+      <li onclick="changeTree(18)" class="menuTree num6">
+        Haseln
+      </li>
+      <li onclick="changeTree(19)" class="menuTree num6">
+        Flügelnüsse
+      </li>
+    </ul>
+    <ul>
+      <li onclick="changeTree(20)" class="menuTree num7">
+        Ahorne
+      </li>
+      <li onclick="changeTree(21)" class="menuTree num7">
+        Rosskastanien
+      </li>
+    </ul>
+    <ul>
+      <li onclick="changeTree(22)" class="menuTree num8">
+        Platanen
+      </li>
+    </ul>
   </div>
   <div id="tree">
-    <div id="info">
-
-    </div>
     <div id="data">
 
     </div>
+    <div id="info">
+      <h2 id="treeT"></h2>
+      <p>In Ulm gibt es <span id="count"></span> <span class="treeP"></span>. <span id="countProtected"></span>
+      <span class="treeP"></span> in Ulm sind als Naturdenkmal besonders geschützt. Die verschiedenen Arten
+      von <span class="treeP"></span> in Ulm sind: <span id="types"></span>.</p>
+    </div>
+  </div>
+  <div id="filter">
+    <ul>
+      <li onclick="filterBy(0)" class="filterButton">
+        Größe
+      </li>
+      <li class="seperator"></li>
+      <li onclick="filterBy(1)" class="filterButton">
+        Dichte
+      </li>
+      <li class="seperator"></li>
+      <li onclick="filterBy(2)" class="filterButton">
+        Alter
+      </li>
+      <li class="seperator"></li>
+      <li onclick="filterBy(3)" class="filterButton">
+        Stammdurchmesser
+      </li>
+      <li class="seperator"></li>
+      <li onclick="filterBy(4)" class="filterButton">
+        Kronendurchmesser
+      </li>
+    </ul>
   </div>
   <div id="map">
+    <div id="legend">
+      <ul>
+        <li><div id="square0"></div>Gesund</li>
+        <li><div id="square1"></div>Leicht beschädigt</li>
+        <li><div id="square2"></div>Mittelstark beschädigt</li>
+        <li><div id="square3"></div>Stark beschädigt</li>
+        <li><div id="square4"></div>Sehr stark beschädigt</li>
+      </ul>
+    </div>
     <div id="mapCanvas">
 
     </div>
   </div>
   <div id="static">
+    <div id="infoButton">
+      i
+    </div>
     <div id="vermin">
-
+      <h2>Die bedrohenden Ungeziefer</h2>
+      <h3>Ungeziefer1</h3>
+      <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+        nonumy eirmod tempor invidunt ut labore et dolore magna
+        aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+        duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+        sanctus est Lorem ipsum dolor sit amet.</p>
     </div>
     <div id="future">
-  
+      <h2>Alternative Bäume für die Zukunft</h2>
+      <h3>Ulmus lobe</h3>
+      <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+        nonumy eirmod tempor invidunt ut labore et dolore magna
+        aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+        duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+        sanctus est Lorem ipsum dolor sit amet.</p>
     </div>
   </div>
 </body>
