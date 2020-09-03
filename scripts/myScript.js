@@ -227,8 +227,10 @@ var maxIdx = 0;
 changeFamily(0);
 changeTree(0);
 
+//Zeichne das Balkendiagramm
 function drawDiagramm()
 {
+    //Berechne die Werte für die Balken
     bars = [0, 0, 0];
     var diagrammData = treeData.filter(d => new RegExp(TreeBotNames[currentTree]).exec(d.Baumart_botanisch) != null);
     var statusData = 0;
@@ -312,6 +314,7 @@ function drawDiagramm()
     bars[1] = Math.round((bars[1] + Number.EPSILON) * 100) / 100;
     statusData /= diagrammData.length;
     
+    //Extra code falls die Dichte berechnet werden muss
     if(currentAttr === 1)
     {
         var area = 0;
@@ -358,6 +361,7 @@ function drawDiagramm()
         ];
     }
 
+    //Zeichne die Balken und den Text darüber
     dataSvg.selectAll("rect")
         .data(bars)
         .enter()
@@ -401,7 +405,8 @@ function drawDiagramm()
         })
         .attr("text-anchor", "middle")
         .attr("fill", "#707070");
-
+    
+    //Passe die Balken an die Daten an
     switch(currentAttr)
     {
         case 0:
@@ -552,6 +557,7 @@ function drawDiagramm()
     }
 }
 
+//Ändere die Baumkategorie
 function changeFamily(n)
 {
     var sitemap = document.getElementById("sitemap");
@@ -578,14 +584,15 @@ function changeFamily(n)
 //Ändere den Baum
 function changeTree(n)
 {
+    //Passt das Design in der Navigation an
     currentTree = n;
     var trees = document.getElementsByClassName("menuTree");
     for (let i = 0; i < trees.length; i++) {
         trees[i].className = trees[i].className.replace(" active", "");
     }
     trees[n].className += " active";
-    //TODO: Change data based on tree
-    //Change infotext
+
+    //Ändere den infotext
     var count = document.getElementById("count");
     var treeP = document.getElementsByClassName("treeP");
     var countProtected = document.getElementById("countProtected");
@@ -615,7 +622,7 @@ function changeTree(n)
     types.innerHTML = typesStr;
     treeT.innerHTML = TreeNamesS[n];
 
-    //Change tree value
+    //Ändere das Attribut
     for (let i = 0; i < status.length; i++) {
         status[i] = 0;
     }
@@ -633,7 +640,7 @@ function changeTree(n)
     }
     filterBy(currentAttr);
 
-    //Change map
+    //Zeichne die Karte
     drawMap(n, currentAttr);
 }
 
@@ -868,6 +875,7 @@ function drawMap(n, f)
     }
 }
 
+//Zeigt die Statische Info an oder blendet sie aus
 function toggleStaticInfo()
 {
     var staticInfo = document.getElementById("staticInfo");
@@ -884,6 +892,7 @@ function toggleStaticInfo()
     }
 }
 
+//---CODE AUS GDG1 ABGABE---\\
 var slideIndex = 0;
 
 function plusSlides(n)
@@ -958,6 +967,7 @@ function showBew(n)
 	dots[bewIndex].className += " activeS";
 }
 
+//Zeigt die Sitemap an oder blendet sie aus
 function toggleSitemap()
 {
     var sitemap = document.getElementById("sitemap");
