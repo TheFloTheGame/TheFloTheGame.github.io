@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Ulmer Bäume</title>
+
+  <!-- Stylesheets -->
+  <link href="./libs/style/normalize.css" rel="stylesheet" type="text/css" />
+  <link href="./libs/style/skeleton.css" rel="stylesheet" type="text/css" />
+  <link href="./styles/myStyle.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300..900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Scripts -->
+  <script src="https://d3js.org/d3.v5.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+  <!--script defer src="./scripts/myScript.js" type="text/javascript" charset="utf-8"></script-->
+  <script src="./data/Baeume_ulm.js" type="text/javascript" charset="utf-8"></script>
+  <script src="./data/Baumkataster_Naturdenkmal.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>Ulmer Bäume</h1>
+    <div id="menuTop">
+      <ul>
+        <li><a href="index.html">
+          Startseite
+        </a></li>
+        <li class="seperator"></li>
+        <li><a href="#" class="active">
+          Über uns
+        </a></li>
+        <li class="seperator"></li>
+        <li><a onclick="toggleSitemap()" id="sitemap">
+          Sitemap
+        </a></li>
+      </ul>
+    </div>
+    <div id="search">
+      <div id="searchButton">
+        <img src="assets/searchIcon.svg" width="32px"/>
+      </div>
+      <input type='text' placeholder='Suche...' id='search-text-input' />
+    </div>
+  </div>
+  <div id="content">
+      <h2>Über uns</h2>
+      <p><h3>Uni Ulm<br>Institut für Medieninformatik<br><br>GdG2 Projekt</h3><br>
+      Sommersemester 2020<br><br><h3>Gruppenmitglieder</h3><br>Florian Klassen<br>Dominik Tabib Khoie<br>Jeremy Gopp<br>
+      <h3>Betreuer</h3><br>Bernadett Ritter<br>Julius Schürrle<br><br><h3>Quellen</h3><br>Daten:<br><a href="http://daten.ulm.de/datenkatalog/offene_daten">http://daten.ulm.de/datenkatalog/offene_daten</a><br>
+      Informationen:<br><a href="https://www.nabu.de/tiere-und-pflanzen/pflanzen/pflanzenwissen/04009.html">https://www.nabu.de/tiere-und-pflanzen/pflanzen/pflanzenwissen/04009.html</a><br>
+      <a href="https://www.klimawandelgehoelze.de/klimawandelgeh%C3%B6lze/">https://www.klimawandelgehoelze.de/klimawandelgeh%C3%B6lze/</a><br>
+      <a href="https://www.mein-schoener-garten.de/pflanzen/baeume-und-straeucher">https://www.mein-schoener-garten.de/pflanzen/baeume-und-straeucher</a><br>
+      <a href="https://www.baumpflegeportal.de/aktuell/herausforderung-stadtbaum-der-zukunft/">https://www.baumpflegeportal.de/aktuell/herausforderung-stadtbaum-der-zukunft/</a><br>
+      <a href="https://www.sdw.de/waldwissen/baeume-in-der-stadt/index.html">https://www.sdw.de/waldwissen/baeume-in-der-stadt/index.html</a><br>
+      <a href="https://www.br.de/wissen/klimawandel-stadtbaeume-zukunft-100.html">https://www.br.de/wissen/klimawandel-stadtbaeume-zukunft-100.html</a><br>
+      <a href="https://www.extratipp.com/aufreger/staedte-jaeger-hunde-urin-zerstoert-pflanzen-baumwurzeln-4792735.html">https://www.extratipp.com/aufreger/staedte-jaeger-hunde-urin-zerstoert-pflanzen-baumwurzeln-4792735.html</a><br>
+      <a href="https://www.forstpraxis.de/auswirkung-einsatzes-streusalz-strassenbaeume/">https://www.forstpraxis.de/auswirkung-einsatzes-streusalz-strassenbaeume/</a><br>
+      Geodaten:<br><a href="https://raw.githubusercontent.com/TheFloTheGame/Ulm-Baum/master/data/ulm.geojson">https://raw.githubusercontent.com/TheFloTheGame/Ulm-Baum/master/data/ulm.geojson</a><br>
+      Referenzen:<br><a href="https://www.d3-graph-gallery.com/">https://www.d3-graph-gallery.com/</a></p>
+  </div>
+</body>
+</html>

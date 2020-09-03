@@ -18,6 +18,22 @@ const treeDataDistrict = [
     treeData.filter(d => d.Bezirk === "210 Stadtteil Unterweiler")
 ];
 
+const districtNames = [
+    "Stadtteil Lehr",
+    "Stadtteil Jungingen",
+    "Stadtmitte",
+    "Stadtteil Osten",
+    "Stadtteil Böfingen",
+    "Stadtteil Westen",
+    "Stadtteil Söflingen",
+    "Stadtteil Ermingen",
+    "Stadtteil Eggingen",
+    "Stadtteil Einsingen",
+    "Stadtteil Wiblingen",
+    "Stadtteil Gögglingen",
+    "Stadtteil Unterweiler"
+]
+
 const TreeBotNames = [
     "Ulmus",
     "Sorbus",
@@ -28,7 +44,7 @@ const TreeBotNames = [
     "Taxus",
     "Tilia",
     "Fraxinus",
-    "Styphnolobium",
+    "Sophora",
     "Robinia",
     "Salix",
     "Populus",
@@ -112,13 +128,18 @@ const districtArea = [
     3,     //Unterweiler (geschätzt, da keine Info)
 ]
 
+const tooltip = d3.select("body")
+    .append("div")
+    .attr("id", "tooltip");
+
 //---MAP---\\
 const mapCanvas = document.getElementById('mapCanvas');
 const heightScale = d3.scaleLinear()
     .domain([0, 30])
     .range([3, 20]);
-const densityScale = d3.scaleLinear()
-    .domain([0, 50])
+const densityScale = d3.scalePow()
+    .exponent(0.3)
+    .domain([0, 1200])
     .range([3, 20]);
 const ageScale = d3.scaleLinear()
     .domain([0, 200])
@@ -130,8 +151,8 @@ const crownScale = d3.scaleLinear()
     .domain([0, 20])
     .range([3, 20]);
 const healthScale = d3.scaleQuantize()
-    .domain([0, 1, 2, 3, 4])
-    .range(["#DE2B2B", "#D9992A", "#F2DF31", "#8DDC15", "#2E8A28"]);
+    .domain([0, 4])
+    .range(["#2E8A28", "#8DDC15", "#F2DF31", "#D9992A", "#DE2B2B"]);
 var filteredBy = []
 filteredBy.length = treeDataDistrict.length;
 var valueAvrg = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -155,21 +176,390 @@ d3.json("https://raw.githubusercontent.com/TheFloTheGame/Ulm-Baum/master/data/ul
         .append("path")
             .attr("fill", "#B0B0B0")
             .attr("d", d3.geoPath().projection(projection))
-        .style("stroke", "blue")
-        .style("opacity", ".3");
+        .style("stroke", "#1D5719")
+        .style("opacity", ".4");
+    svg.selectAll("g").lower();
 });
+
+//---DIAGRAMM---\\
+const dataCanvas = document.getElementById("data");
+var dataSvg = d3.select(dataCanvas).append("svg")
+    .attr("width", 750)
+    .attr("height", 450)
+    .append("g")
+    .attr("transform", "translate(0, 0)");
+
+const heightScaleD = d3.scalePow()
+    .exponent(0.7)
+    .domain([0, 81])
+    .range([440, 20]);
+const densityScaleD = d3.scalePow()
+    .exponent(0.3)
+    .domain([0, 1200])
+    .range([440, 20]);
+const ageScaleD = d3.scalePow()
+    .exponent(0.6)
+    .domain([0, 600])
+    .range([440, 20]);
+const logScaleD = d3.scalePow()
+    .exponent(0.4)
+    .domain([0, 1500])
+    .range([440, 20]);
+const crownScaleD = d3.scalePow()
+    .exponent(0.7)
+    .domain([0, 40])
+    .range([440, 20]);
+const dataScale = d3.scaleBand()
+    .domain(["min.", "durchschnitt", "max."])
+    .range([0, 800])
+    .padding(0.3);
+
+var bars = [0, 0, 0];
 
 //---FUNCTIONS---\\
 
 //Ändere die Baumfamilie
 var currentAttr = 0;
 var currentTree = 0;
+var currentFamily = 0;
+var minIdx = 0;
+var maxIdx = 0;
 changeFamily(0);
 changeTree(0);
 
+function drawDiagramm()
+{
+    bars = [0, 0, 0];
+    var diagrammData = treeData.filter(d => new RegExp(TreeBotNames[currentTree]).exec(d.Baumart_botanisch) != null);
+    var statusData = 0;
+    for (let i = 0; i < diagrammData.length; i++) {
+        statusData += Number(diagrammData[i].Vitalitaetsstatus_aktuell.substring(0, 1));
+        switch(currentAttr)
+        {
+            case 0:
+                if(!isNaN(diagrammData[i].Baumhoehe_aktuell))
+                {
+                    if(Number(diagrammData[i].Baumhoehe_aktuell) < bars[0])
+                    {
+                        bars[0] = Number(diagrammData[i].Baumhoehe_aktuell);
+                        minIdx = i;
+                    }
+                    if(Number(diagrammData[i].Baumhoehe_aktuell) > bars[2])
+                    {
+                        bars[2] = Number(diagrammData[i].Baumhoehe_aktuell);
+                        maxIdx = i;
+                    }
+                    bars[1] += Number(diagrammData[i].Baumhoehe_aktuell);
+                }
+                break;
+            case 1:
+                //TODO
+                break;
+            case 2:
+                if(!isNaN(diagrammData[i].Pflanzjahr_geschaetzt))
+                {
+                    if(diagrammData[i].Pflanzjahr_geschaetzt > 0)
+                    {
+                        if(Number(2020 - diagrammData[i].Pflanzjahr_geschaetzt) < bars[0])
+                        {
+                            bars[0] = Number(2020 - diagrammData[i].Pflanzjahr_geschaetzt);
+                            minIdx = i;
+                        }
+                        if(Number(2020 - diagrammData[i].Pflanzjahr_geschaetzt) > bars[2])
+                        {
+                            bars[2] = Number(2020 - diagrammData[i].Pflanzjahr_geschaetzt);
+                            maxIdx = i;
+                        }
+                        bars[1] += Number(2020 - diagrammData[i].Pflanzjahr_geschaetzt);
+                    }
+                }
+                break;
+            case 3:
+                if(!isNaN(diagrammData[i].Stammdurchm_aktuell))
+                {
+                    if(Number(diagrammData[i].Stammdurchm_aktuell) < bars[0])
+                    {
+                        bars[0] = Number(diagrammData[i].Stammdurchm_aktuell);
+                        minIdx = i;
+                    }
+                    if(Number(diagrammData[i].Stammdurchm_aktuell) > bars[2])
+                    {
+                        bars[2] = Number(diagrammData[i].Stammdurchm_aktuell);
+                        maxIdx = i;
+                    }
+                    bars[1] += Number(diagrammData[i].Stammdurchm_aktuell);
+                }
+                break;
+            case 4:
+                if(!isNaN(diagrammData[i].Kronendurchm_aktuell))
+                {
+                    if(Number(diagrammData[i].Kronendurchm_aktuell) < bars[0])
+                    {
+                        bars[0] = Number(diagrammData[i].Kronendurchm_aktuell);
+                        minIdx = i;
+                    }
+                    if(Number(diagrammData[i].Kronendurchm_aktuell) > bars[2])
+                    {
+                        bars[2] = Number(diagrammData[i].Kronendurchm_aktuell);
+                        maxIdx = i;
+                    }
+                    bars[1] += Number(diagrammData[i].Kronendurchm_aktuell);
+                }
+                break;
+        }
+    }
+    bars[1] /= diagrammData.length;
+    bars[1] = Math.round((bars[1] + Number.EPSILON) * 100) / 100;
+    statusData /= diagrammData.length;
+    
+    if(currentAttr === 1)
+    {
+        var area = 0;
+        bars[0] = [100, 0];
+        bars[2] = [-100, 0];
+        for (let i = 0; i < treeDataDistrict.length; i++) {
+            var diagrammDistrictData = treeDataDistrict[i].filter(d => new RegExp(TreeBotNames[currentTree]).exec(d.Baumart_botanisch) != null);
+            if(diagrammDistrictData.length > 0)
+            {
+                if(bars[0][0] > (diagrammDistrictData.length / districtArea[i]))
+                {
+                    var statusMin = 0;
+                    for (let j = 0; j < diagrammDistrictData.length; j++) {
+                        statusMin += Number(diagrammDistrictData[j].Vitalitaetsstatus_aktuell.substring(0, 1));
+                    }
+                    statusMin /= diagrammDistrictData.length;
+                    bars[0] = [diagrammDistrictData.length / districtArea[i], statusMin, diagrammDistrictData[0].Bezirk.substring(4)];
+                    bars[0][0] = Math.round((bars[0][0] + Number.EPSILON) * 100) / 100;
+                }
+                if(bars[2][0] < (diagrammDistrictData.length / districtArea[i]))
+                {
+                    var statusMax = 0;
+                    for (let j = 0; j < diagrammDistrictData.length; j++) {
+                        statusMax += Number(diagrammDistrictData[j].Vitalitaetsstatus_aktuell.substring(0, 1));
+                    }
+                    statusMax /= diagrammDistrictData.length;
+                    bars[2] = [diagrammDistrictData.length / districtArea[i], statusMax, diagrammDistrictData[0].Bezirk.substring(4)];
+                    bars[2][0] = Math.round((bars[2][0] + Number.EPSILON) * 100) / 100;
+                }
+                bars[1] += diagrammDistrictData.length;
+                area += districtArea[i];
+            }
+        }
+        bars[1] /= area;
+        bars[1] = Math.round((bars[1] + Number.EPSILON) * 100) / 100;
+        bars[1] = [bars[1], statusData, "Ulm"];
+    }
+    else
+    {
+        bars = [
+            [bars[0], Number(diagrammData[minIdx].Vitalitaetsstatus_aktuell.substring(0, 1)), diagrammData[minIdx].Bezirk.substring(4)],
+            [bars[1], statusData, "Ulm"],
+            [bars[2], Number(diagrammData[maxIdx].Vitalitaetsstatus_aktuell.substring(0, 1)), diagrammData[minIdx].Bezirk.substring(4)]
+        ];
+    }
+
+    dataSvg.selectAll("rect")
+        .data(bars)
+        .enter()
+        .append("rect")
+    dataSvg.selectAll("rect")
+        .data(bars)
+        .attr("x", function(d, i) {
+            switch(i)
+            {
+                case 0:
+                    return dataScale("min.");
+                case 1:
+                    return dataScale("durchschnitt");
+                case 2:
+                    return dataScale("max.");
+                default:
+                    return;
+            };
+        })
+        .attr("fill", d => healthScale(d[1]))
+        .attr("width", dataScale.bandwidth());
+
+    dataSvg.selectAll("text")
+        .data(bars)
+        .enter()
+        .append("text")
+    dataSvg.selectAll("text")
+        .data(bars)
+        .attr("x", function(d, i) {
+            switch(i)
+            {
+                case 0:
+                    return dataScale("min.") + dataScale.bandwidth() / 2;
+                case 1:
+                    return dataScale("durchschnitt") + dataScale.bandwidth() / 2;
+                case 2:
+                    return dataScale("max.") + dataScale.bandwidth() / 2;
+                default:
+                    return;
+            };
+        })
+        .attr("text-anchor", "middle")
+        .attr("fill", "#707070");
+
+    switch(currentAttr)
+    {
+        case 0:
+            dataSvg.selectAll("rect")
+                .data(bars)
+                .attr("y", d => heightScaleD(d[0]))
+                .attr("height", d => 500 - heightScaleD(d[0]))
+                .on("mouseover", function(d, i)
+                {
+                    if(!d)
+                    {
+                        return;
+                    }
+                    tooltip.html(d[2]);
+                    tooltip.style("display", "block")
+                        .style("opacity", 1)
+                })
+                .on("mousemove", function()
+                {
+                    tooltip.style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 30) + "px");
+                })
+                .on("mouseout", function()
+                {
+                    tooltip.style("display", "none");
+                });
+            dataSvg.selectAll("text")
+                .data(bars)
+                .attr("y", d => heightScaleD(d[0]) - 5)
+                .text(d => d[0] + "m");
+            break;
+        case 1:
+            dataSvg.selectAll("rect")
+                .data(bars)
+                .attr("y", d => densityScaleD(d[0]))
+                .attr("height", d => 500 - densityScaleD(d[0]))
+                .on("mouseover", function(d, i)
+                {
+                    if(!d)
+                    {
+                        return;
+                    }
+                    tooltip.html(d[2]);
+                    tooltip.style("display", "block")
+                        .style("opacity", 1)
+                })
+                .on("mousemove", function()
+                {
+                    tooltip.style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 30) + "px");
+                })
+                .on("mouseout", function()
+                {
+                    tooltip.style("display", "none");
+                });
+            dataSvg.selectAll("text")
+                .data(bars)
+                .attr("y", d => densityScaleD(d[0]) - 5)
+                .text(d => d[0] + "Bäume/\u33A2");
+            break;
+        case 2:
+            dataSvg.selectAll("rect")
+                .data(bars)
+                .attr("y", d => ageScaleD(d[0]))
+                .attr("height", d => 500 - ageScaleD(d[0]))
+                .on("mouseover", function(d, i)
+                {
+                    if(!d)
+                    {
+                        return;
+                    }
+                    tooltip.html(d[2]);
+                    tooltip.style("display", "block")
+                        .style("opacity", 1)
+                })
+                .on("mousemove", function()
+                {
+                    tooltip.style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 30) + "px");
+                })
+                .on("mouseout", function()
+                {
+                    tooltip.style("display", "none");
+                });
+            dataSvg.selectAll("text")
+                .data(bars)
+                .attr("y", d => ageScaleD(d[0]) - 5)
+                .text(d => d[0] + " Jahre");
+            break;
+        case 3:
+            dataSvg.selectAll("rect")
+                .data(bars)
+                .attr("y", d => logScaleD(d[0]))
+                .attr("height", d => 500 - logScaleD(d[0]))
+                .on("mouseover", function(d, i)
+                {
+                    if(!d)
+                    {
+                        return;
+                    }
+                    tooltip.html(d[2]);
+                    tooltip.style("display", "block")
+                        .style("opacity", 1)
+                })
+                .on("mousemove", function()
+                {
+                    tooltip.style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 30) + "px");
+                })
+                .on("mouseout", function()
+                {
+                    tooltip.style("display", "none");
+                });
+            dataSvg.selectAll("text")
+                .data(bars)
+                .attr("y", d => logScaleD(d[0]) - 5)
+                .text(d => d[0] + "m");
+            break;
+        case 4:
+            dataSvg.selectAll("rect")
+                .data(bars)
+                .attr("y", d => crownScaleD(d[0]))
+                .attr("height", d => 500 - crownScaleD(d[0]))
+                .on("mouseover", function(d, i)
+                {
+                    if(!d)
+                    {
+                        return;
+                    }
+                    tooltip.html(d[2]);
+                    tooltip.style("display", "block")
+                        .style("opacity", 1)
+                })
+                .on("mousemove", function()
+                {
+                    tooltip.style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 30) + "px");
+                })
+                .on("mouseout", function()
+                {
+                    tooltip.style("display", "none");
+                });
+            dataSvg.selectAll("text")
+                .data(bars)
+                .attr("y", d => crownScaleD(d[0]) - 5)
+                .text(d => d[0] + "m");
+            break;
+    }
+}
 
 function changeFamily(n)
 {
+    var sitemap = document.getElementById("sitemap");
+    if(sitemap.className === "active")
+    {
+        return;
+    }
+    currentFamily = n;
     var families = document.getElementsByClassName("menu");
     var treesInactive = document.getElementsByClassName("menuTree");
     var trees = document.getElementsByClassName("menuTree num" + n);
@@ -317,6 +707,7 @@ function filterBy(n)
         }
     }
     drawMap(currentTree, n);
+    drawDiagramm();
 }
 
 //Zeichne die Kreise auf der Map neu
@@ -357,27 +748,122 @@ function drawMap(n, f)
         case 0:
             svg.selectAll("circle")
                 .data(points)
-                .attr("r", function(d){ if(d[2] != -1){ return heightScale(d[2]) } return 0 });
+                .attr("r", function(d){ if(d[2] != -1){ return heightScale(d[2]) } return 0 })
+                .on("mouseover", function(d, i)
+                {
+                    if(!d)
+                    {
+                        return;
+                    }
+                    tooltip.html(districtNames[i] + "<br>" + "Höhe: " + Math.round((d[2] + Number.EPSILON) * 100) / 100 + "m");
+                    tooltip.style("display", "block")
+                        .style("opacity", 1);
+                })
+                .on("mousemove", function()
+                {
+                    tooltip.style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 60) + "px");
+                })
+                .on("mouseout", function()
+                {
+                    tooltip.style("display", "none");
+                });
             break;
         case 1:
             svg.selectAll("circle")
                 .data(points)
-                .attr("r", function(d){ if(d[2] != -1){ return densityScale(d[2]) } return 0 });
+                .attr("r", function(d){ if(d[2] != -1){ return densityScale(d[2]) } return 0 })
+                .on("mouseover", function(d, i)
+                {
+                    if(!d)
+                    {
+                        return;
+                    }
+                    tooltip.html(districtNames[i] + "<br>" + "Dichte: " + Math.round((d[2] + Number.EPSILON) * 100) / 100 + " Bäume/\u33A2");
+                    tooltip.style("display", "block")
+                        .style("opacity", 1);
+                })
+                .on("mousemove", function()
+                {
+                    tooltip.style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 60) + "px");
+                })
+                .on("mouseout", function()
+                {
+                    tooltip.style("display", "none");
+                });
             break;
         case 2:
             svg.selectAll("circle")
                 .data(points)
-                .attr("r", function(d){ if(d[2] != -1){ return ageScale(d[2]) } return 0 });
+                .attr("r", function(d){ if(d[2] != -1){ return ageScale(d[2]) } return 0 })
+                .on("mouseover", function(d, i)
+                {
+                    if(!d)
+                    {
+                        return;
+                    }
+                    tooltip.html(districtNames[i] + "<br>" + "Alter: " + Math.round((d[2] + Number.EPSILON) * 100) / 100 + " Jahre");
+                    tooltip.style("display", "block")
+                        .style("opacity", 1);
+                })
+                .on("mousemove", function()
+                {
+                    tooltip.style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 60) + "px");
+                })
+                .on("mouseout", function()
+                {
+                    tooltip.style("display", "none");
+                });
             break;
         case 3:
             svg.selectAll("circle")
                 .data(points)
-                .attr("r", function(d){ if(d[2] != -1){ return logScale(d[2]) } return 0 });
+                .attr("r", function(d){ if(d[2] != -1){ return logScale(d[2]) } return 0 })
+                .on("mouseover", function(d, i)
+                {
+                    if(!d)
+                    {
+                        return;
+                    }
+                    tooltip.html(districtNames[i] + "<br>" + "Stammdurchmesser: " + Math.round((d[2] + Number.EPSILON) * 100) / 100 + "m");
+                    tooltip.style("display", "block")
+                        .style("opacity", 1);
+                })
+                .on("mousemove", function()
+                {
+                    tooltip.style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 60) + "px");
+                })
+                .on("mouseout", function()
+                {
+                    tooltip.style("display", "none");
+                });
             break;
         case 4:
             svg.selectAll("circle")
                 .data(points)
-                .attr("r", function(d){ if(d[2] != -1){ return crownScale(d[2]) } return 0 });
+                .attr("r", function(d){ if(d[2] != -1){ return crownScale(d[2]) } return 0 })
+                .on("mouseover", function(d, i)
+                {
+                    if(!d)
+                    {
+                        return;
+                    }
+                    tooltip.html(districtNames[i] + "<br>" + "Kronendurchmesser: " + Math.round((d[2] + Number.EPSILON) * 100) / 100 + "m");
+                    tooltip.style("display", "block")
+                        .style("opacity", 1);
+                })
+                .on("mousemove", function()
+                {
+                    tooltip.style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 60) + "px");
+                })
+                .on("mouseout", function()
+                {
+                    tooltip.style("display", "none");
+                });
             break;
     }
 }
@@ -395,5 +881,111 @@ function toggleStaticInfo()
     {
         staticInfo.style.display = "block";
         infoButton.className += "active";
+    }
+}
+
+var slideIndex = 0;
+
+function plusSlides(n)
+{
+	showSlides(slideIndex += n);
+}
+
+function currentSlide(n)
+{
+	showSlides(slideIndex = n);
+}
+
+function showSlides(n)
+{
+	var i;
+	var slides = document.getElementsByClassName("slide");
+	var dots = document.getElementsByClassName("dot");
+	if (n >= slides.length)
+	{
+		slideIndex = 0;
+	}
+	if (n < 0)
+	{
+		slideIndex = slides.length - 1;
+	}
+	for (i = 0; i < slides.length; i++)
+	{
+		slides[i].style.display = "none";
+	}
+	for (i = 0; i < dots.length; i++)
+	{
+		dots[i].className = dots[i].className.replace(" activeS", "");
+	}
+	slides[slideIndex].style.display = "block";
+	dots[slideIndex].className += " activeS";
+}
+
+var bewIndex = 0;
+
+function plusBew(n)
+{
+	showBew(bewIndex += n);
+}
+
+function currentBew(n)
+{
+	showBew(bewIndex = n);
+}
+
+function showBew(n)
+{
+	var i;
+	var slides = document.getElementsByClassName("slideB");
+	var dots = document.getElementsByClassName("dotB");
+	if (n >= slides.length)
+	{
+		bewIndex = 0;
+	}
+	if (n < 0)
+	{
+		bewIndex = slides.length - 1;
+	}
+	for (i = 0; i < slides.length; i++)
+	{
+		slides[i].style.display = "none";
+	}
+	for (i = 0; i < dots.length; i++)
+	{
+		dots[i].className = dots[i].className.replace(" activeS", "");
+	}
+	slides[bewIndex].style.display = "block";
+	dots[bewIndex].className += " activeS";
+}
+
+function toggleSitemap()
+{
+    var sitemap = document.getElementById("sitemap");
+    var menuTree = document.getElementsByClassName("menuTree");
+    var menuTreeList = document.getElementsByClassName("menuTreeList");
+    var arrow = document.getElementById("arrow");
+    if(sitemap.className === "active")
+    {
+        sitemap.className = sitemap.className.replace("active", "");
+        for (let i = 0; i < menuTree.length; i++) {
+            menuTree[i].className = menuTree[i].className.replace(" open", "");
+        }
+        for (let i = 0; i < menuTreeList.length; i++) {
+            menuTreeList[i].style.display = "block";
+        }
+        changeFamily(currentFamily);
+        arrow.style.display = "block";
+    }
+    else
+    {
+        sitemap.className += "active";
+        for (let i = 0; i < menuTree.length; i++) {
+            menuTree[i].className += " open";
+            menuTree[i].style.display = "block";
+        }
+        for (let i = 0; i < menuTreeList.length; i++) {
+            menuTreeList[i].style.display = "inline-grid";
+        }
+        arrow.style.display = "none";
     }
 }

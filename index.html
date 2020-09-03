@@ -28,6 +28,21 @@
 <body>
   <div id="header">
     <h1>Ulmer Bäume</h1>
+    <div id="menuTop">
+      <ul>
+        <li><a href="#" class="active">
+          Startseite
+        </a></li>
+        <li class="seperator"></li>
+        <li><a href="about.html">
+          Über uns
+        </a></li>
+        <li class="seperator"></li>
+        <li><a onclick="toggleSitemap()" id="sitemap">
+          Sitemap
+        </a></li>
+      </ul>
+    </div>
     <div id="search">
       <div id="searchButton">
         <img src="assets/searchIcon.svg" width="32px"/>
@@ -68,97 +83,108 @@
       </ul>
     </div>
     <div id="arrow">&#10095;</div>
-    <ul>
-      <li onclick="changeTree(0)" class="menuTree num0">
-        Ulmen
-      </li>
-      <li onclick="changeTree(1)" class="menuTree num0">
-        Mehlbeeren
-      </li>
-      <li onclick="changeTree(2)" class="menuTree num0">
-        Weißdornen
-      </li>
-      <li onclick="changeTree(3)" class="menuTree num0">
-        Birnen
-      </li>
-      <li onclick="changeTree(4)" class="menuTree num0">
-        Prunus
-      </li>
-    </ul>
-    <ul>
-      <li onclick="changeTree(5)" class="menuTree num1">
-        Kiefern
-      </li>
-      <li onclick="changeTree(6)" class="menuTree num1">
-        Eiben
-      </li>
-    </ul>
-    <ul>
-      <li onclick="changeTree(7)" class="menuTree num2">
-        Linden
-      </li>
-    </ul>
-    <ul>
-      <li onclick="changeTree(8)" class="menuTree num3">
-        Eschen
-      </li>
-    </ul>
-    <ul>
-      <li onclick="changeTree(9)" class="menuTree num4">
-        Japanische Schnurbäume
-      </li>
-      <li onclick="changeTree(10)" class="menuTree num4">
-        Robinien
-      </li>
-    </ul>
-    <ul>
-      <li onclick="changeTree(11)" class="menuTree num5">
-        Weiden
-      </li>
-      <li onclick="changeTree(12)" class="menuTree num5">
-        Pappeln
-      </li>
-    </ul>
-    <ul>
-      <li onclick="changeTree(13)" class="menuTree num6">
-        Eichen
-      </li>
-      <li onclick="changeTree(14)" class="menuTree num6">
-        Buchen
-      </li>
-      <li onclick="changeTree(15)" class="menuTree num6">
-        Erlen
-      </li>
-      <li onclick="changeTree(16)" class="menuTree num6">
-        Birken
-      </li>
-      <li onclick="changeTree(17)" class="menuTree num6">
-        Hainbuchen
-      </li>
-      <li onclick="changeTree(18)" class="menuTree num6">
-        Haseln
-      </li>
-      <li onclick="changeTree(19)" class="menuTree num6">
-        Flügelnüsse
-      </li>
-    </ul>
-    <ul>
-      <li onclick="changeTree(20)" class="menuTree num7">
-        Ahorne
-      </li>
-      <li onclick="changeTree(21)" class="menuTree num7">
-        Rosskastanien
-      </li>
-    </ul>
-    <ul>
-      <li onclick="changeTree(22)" class="menuTree num8">
-        Platanen
-      </li>
-    </ul>
+    <div class="menuTreeList" style="grid-template-columns: 146px 116px 149px 211px 296px 186px 155px 197px 191px;">
+      <ul>
+        <li onclick="changeTree(0)" class="menuTree num0">
+          Ulmen
+        </li>
+        <li onclick="changeTree(1)" class="menuTree num0">
+          Mehlbeeren
+        </li>
+        <li onclick="changeTree(2)" class="menuTree num0">
+          Weißdornen
+        </li>
+        <li onclick="changeTree(3)" class="menuTree num0">
+          Birnen
+        </li>
+        <li onclick="changeTree(4)" class="menuTree num0">
+          Prunus
+        </li>
+      </ul>
+      <ul>
+        <li onclick="changeTree(5)" class="menuTree num1">
+          Kiefern
+        </li>
+        <li onclick="changeTree(6)" class="menuTree num1">
+          Eiben
+        </li>
+      </ul>
+      <ul>
+        <li onclick="changeTree(7)" class="menuTree num2">
+          Linden
+        </li>
+      </ul>
+      <ul>
+        <li onclick="changeTree(8)" class="menuTree num3">
+          Eschen
+        </li>
+      </ul>
+      <ul>
+        <li onclick="changeTree(9)" class="menuTree num4">
+          Japanische Schnurbäume
+        </li>
+        <li onclick="changeTree(10)" class="menuTree num4">
+          Robinien
+        </li>
+      </ul>
+      <ul>
+        <li onclick="changeTree(11)" class="menuTree num5">
+          Weiden
+        </li>
+        <li onclick="changeTree(12)" class="menuTree num5">
+          Pappeln
+        </li>
+      </ul>
+      <ul>
+        <li onclick="changeTree(13)" class="menuTree num6">
+          Eichen
+        </li>
+        <li onclick="changeTree(14)" class="menuTree num6">
+          Buchen
+        </li>
+        <li onclick="changeTree(15)" class="menuTree num6">
+          Erlen
+        </li>
+        <li onclick="changeTree(16)" class="menuTree num6">
+          Birken
+        </li>
+        <li onclick="changeTree(17)" class="menuTree num6">
+          Hainbuchen
+        </li>
+        <li onclick="changeTree(18)" class="menuTree num6">
+          Haseln
+        </li>
+        <li onclick="changeTree(19)" class="menuTree num6">
+          Flügelnüsse
+        </li>
+      </ul>
+      <ul>
+        <li onclick="changeTree(20)" class="menuTree num7">
+          Ahorne
+        </li>
+        <li onclick="changeTree(21)" class="menuTree num7">
+          Rosskastanien
+        </li>
+      </ul>
+      <ul>
+        <li onclick="changeTree(22)" class="menuTree num8">
+          Platanen
+        </li>
+      </ul>
+    </div>
   </div>
   <div id="tree">
     <div id="data">
-
+      
+    </div>
+    <div id="dataLegend">
+      <ul>
+        <li></li>
+        <li>min.</li>
+        <li>durchschnitt</li>
+        <li>max.</li>
+        <li></li>
+      </ul>
     </div>
     <div id="info">
       <h2 id="treeT"></h2>
@@ -210,48 +236,363 @@
     </div>
     <div id="staticInfo">
       <div id="vermin">
-        <h2>Die bedrohenden Ungeziefer</h2>
-        <h3>Ungeziefer1</h3>
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna
-          aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-          duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-          sanctus est Lorem ipsum dolor sit amet.</p>
+        <h2>Herausforderungen für Stadtbäume</h2>
+        <p>Bäume spielen in der Stadt eine wichtige Rolle. Sie spenden Schatten, kühlen ihre Umgebung ab, bieten vielen
+          Tieren einen Lebensraum und filtern Schadstoffe aus der Luft. Doch in der Stadt gibt es für Bäume viele potentielle
+          Stressfaktoren.</p>
+        <h3>Versiegelte Böden</h3>
+        <p>Versiegelte Böden sind stark verdichtet und durch die ständigen Vibrationen des Straßenverkehrs werden sie
+          luftundurchlässig, dadurch haben Wurzeln es schwerer sich auszubreiten und es gelangt weniger Luft an sie. Zudem
+          versickert Regenwasser sehr schlecht und der Boden kann weniger Wasser aufnehmen.</p>
+        <h3>Schafstoffe in der Luft</h3>
+        <p>Auto-Abgase und Feinstaub bedeuten in hohen Konzentrationen Stress für die Bäume.</p>
+        <h3>Streusalz</h3>
+        <p>Durch direkten Kontakt mit den im Spritzwasser enthaltenen Chloriden wird die Oberfläche der Bäume angegriffen.
+          Die Aufnahme von salzreichem Bodenwasser über die Wurzeln führt zum Absterben der Zellen im Inneren der
+          Bäume.</p>
+        <h3>Hunde-Urin</h3>
+        <p>Die Harnsäure im Hunde-Urin zerstört Pflanzenzellen und kann auf Dauer die feinen Wurzeln der Bäume
+          beschädigen. Der Boden in den sogenannten Baumscheiben wird mit der Zeit regelrecht kontaminiert.</p>
+        <h3>Klimawandel</h3>
+        <p><span>Trockenheit:</span> Steigende Temperaturen führen zu mehr Trockenheit. Beton und Asphalt heizen sich tagsüber auf und
+          strahlen die Wärme in der Nacht ab.<br>
+          <span>Wassermangel:</span> Weniger Niederschlag führt zu trockeneren Böden.<br>
+          <span>Spätfröste:</span> Strenge Fröste im Wechsel mit Hitze führen zum Aufreißen der Rinde vor allem bei jungen Bäumen.
+          Spätfröste können zum erfrieren der jungen Triebe führen.</p>
+        <h3>Schädlinge</h3>
+        <p>Durch die Erwärmung die mit dem Klimawandel einhergeht, wandern Schädlinge Richtung Norden die hier bisher
+          unbekannt waren. Gesunde Bäume können den Schädlingen ohne Probleme trotzen, aber Bäume die durch die oben
+          genannten Faktoren geschwächt sind, sind anfälliger für sie. Stark gefährdet sind die folgenden hierzulande
+          häufigen Arten:</p>
+        <ul>
+          <li>Ulmen durch den Ophiostoma-Schlauchpilz</li>
+          <li>Eschen durch das Falsche Weiße Stängelbecherchen (Pilz)</li>
+          <li>Platanen durch den Massariapilz</li>
+          <li>Eichen durch den Eichenprozessionspinner</li>
+          <li>Rosskastanien durch die Miniermotte</li>
+        </ul>
       </div>
       <div id="future">
-        <h2>Alternative Bäume für die Zukunft</h2>
-        <h3>Ulmus lobe</h3>
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna
-          aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-          duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-          sanctus est Lorem ipsum dolor sit amet.</p>
-          <h3>Ulmussssss lobe</h3>
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna
-            aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-            sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna
-            aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-            sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna
-            aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-            sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna
-            aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-            sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna
-            aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-            sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna
-            aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-            duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-            sanctus est Lorem ipsum dolor sit amet.</p>
+        <h2>Stadtbäume der Zukunft</h2>
+        <p>Durch die extremeren Klimabedingungen in Städten kommen für die Zukunft auch Arten in Frage, die bisher kaum
+          angepflanzt wurden. Als sehr robuste Stadtbäume haben sich in ersten Untersuchungen die folgenden Arten
+          herausgestellt:</p>
+        <div class="slide" style="display: block">
+          <h3>Amberbaum (Liquidambar styraciflua)</h3>
+          <ul>
+            <li>Herkunft:
+              <ul>
+                <li>Nordamerika</li>
+              </ul>
+            </li>
+            <li>Wuchs:
+              <ul>
+                <li>Bis zu 45m hoch</li>
+                <li>Graurindiger Stamm und schmale kegelförmige Krone mit durchgehendem Mitteltrieb</li>
+                <li>Ahornähnliche bis zu 13cm lange glänzend grüne Blätter</li>
+                <li>Kleine unscheinbare Blüten, Blütezeit im Mai</li>
+                <li>Kugelige Früchte, die aus mehreren verholzten Kapseln zusammengesetzt sind</li>
+                <li>Das Laub verfärbt sich schon früh in verschiedenste Farben von Gelborange über Karminrot bis Schwarzviolett</li>
+              </ul>
+            </li>
+            <li>Widerstandskraft:
+              <ul>
+                <li>Benötigt leicht feuchten tiefgründigen Lehmboden, empfindlich gegenüber Staunässe und Bodenverdichtung</li>
+                <li>Bildet eine tiefreichende Pfahlwurzel aus, die ihn sehr sturmsicher macht</li>
+                <li>Benötigt viel Sonne und Licht, verträgt Trockenheit und Hitze sehr gut</li>
+                <li>Ist relativ frosthart und kann bis in Höhen von 600m kultiviert werden</li>
+                <li>Schädlinge und Pilzkrankheiten kommen so gut wie nicht vor</li>
+                <li>Abgase und Staub verträgt er ohne Probleme und gilt als industriefest</li>
+                <li>Die aromatisch duftenden Pflanzenteile müssen vor Wildfraß geschützt werden</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="slide">
+          <h3>Kobushi-Magnolie (Magnolia kobus)</h3>
+          <ul>
+            <li>Herkunft:
+              <ul>
+                <li>Japan</li>
+              </ul>
+            </li>
+            <li>Wuchs:
+              <ul>
+                <li>Bis zu 12m hoch</li>
+                <li>Bräunlicher Stamm und schlanke kegelförmige Krone</li>
+                <li>Eiförmige bis zu 20cm lange dunkelgrüne Blätter</li>
+                <li>spektakuläre Blüte mit 10cm großen weißen sternförmigen Blüten, Blütezeit im Frühjahr</li>
+                <li>Die roten Balgfrüchte werden gerne von Vögeln angenommen</li>
+                <li>Das Laub verfärbt sich leuchtend Goldgelb</li>
+              </ul>
+            </li>
+            <li>Widerstandskraft:
+              <ul>
+                <li>Benötigt nahrhaften humosen Boden und absolut ohne Bodenverdichtung. Staunässe verträgt sie gut</li>
+                <li>Bildet eine fleischige Herzwurzel, die ideal ist um Hänge zu sichern</li>
+                <li>Benötigt einen hellen sonnigen Platz, verträgt keine langen Trockenperioden</li>
+                <li>Ist frostfest, lediglich die frühe Blüte kann Spätfrösten zum Opfer fallen</li>
+                <li>Schädlinge und Pilzkrankheiten kommen so gut wie nicht vor, das Laub wird von manchen Raupen gefressen</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="slide">
+          <h3>Blumen-Esche (Fraxinus ornus)</h3>
+          <ul>
+            <li>Herkunft:
+              <ul>
+                <li>Östliches Mittelmeergebiet</li>
+              </ul>
+            </li>
+            <li>Wuchs:
+              <ul>
+                <li>Bis zu 15m hoch</li>
+                <li>Gerader durchgehender Stamm und lichte kugelförmige Krone</li>
+                <li>Unpaarig gefiederte bis zu 20cm lange dunkelgrüne Blätter</li>
+                <li>Süß duftende cremeweiße federleichte Blüten stehen in 20cm langen Rispen zusammen, Blütezeit April - Juni</li>
+                <li>Beliebte Insektenfutterpflanze</li>
+                <li>Die glänzend dunkelbraunen Flügelfrüchte reifen im Oktober</li>
+                <li>Das Laub verfärbt sich leuchtend Goldgelb</li>
+              </ul>
+            </li>
+            <li>Widerstandskraft:
+              <ul>
+                <li>Sandige steinige Böden sind ideal, Bodenverdichtung verträgt sie nicht gut</li>
+                <li>Bildet eine Herzwurzel mit dichtem Faserwurzelsystem und ist dadurch extrem sturmsicher</li>
+                <li>Benötigt einen vollsonnigen Standort, Schatten verträgt sie nicht. Hitze und Trockenheit sind kein Problem</li>
+                <li>Frostfest nur bis -15 Grad</li>
+                <li>Keine Probleme durch Schädlinge oder Pilze bekannt</li>
+                <li>Absolut abgas- und industriefest</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="slide">
+          <h3>Ginkgobaum (Ginkgo biloba)</h3>
+          <ul>
+            <li>Herkunft:
+              <ul>
+                <li>China</li>
+              </ul>
+            </li>
+            <li>Wuchs:
+              <ul>
+                <li>Bis zu 40m hoch</li>
+                <li>Grauer Stamm und lockere aufrechte kegelförmige Krone, die im Alter ausladender wird</li>
+                <li>Ledrige frischgrüne Fächerblätter mit Einschnitten</li>
+                <li>Zweihäusige Pflanze, unscheinbare Blüten von März - April</li>
+                <li>Die gelben mirabellenähnlichen Früchte riechen unangenehm nach Buttersäure</li>
+                <li>Das Laub verfärbt sich in ein intensives Goldgelb</li>
+              </ul>
+            </li>
+            <li>Widerstandskraft:
+              <ul>
+                <li>Keine besonderen Ansprüche an den Boden</li>
+                <li>Die tief in die Erde reichenden Wurzeln versorgen ihn mit ausreichend Wasser</li>
+                <li>Benötigt Sonne bis Halbschatten und ist absolut trockenheitsverträglich</li>
+                <li>Ist absolut frosthart, die Rinde junger Bäume muss vor Frostrissen geschützt werden</li>
+                <li>Nahezu resistent gegen die typischen Gehölzkrankheiten</li>
+                <li>Abgase sind kein Problem, Streusalz verträgt er nicht ganz so gut</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="slide">
+          <h3>Gleditsie (Gleditsia triacanthos)</h3>
+          <ul>
+            <li>Herkunft:
+              <ul>
+                <li>zentral und östliche USA</li>
+              </ul>
+            </li>
+            <li>Wuchs:
+              <ul>
+                <li>Bis zu 20m hoch</li>
+                <li>Graubrauner Stamm und lockere trichterförmige Krone</li>
+                <li>Am ganzen Stamm Büschel mit bis zu 30cm langen Dornen</li>
+                <li>Die zart gefiederten frischgrünen Blätter, die bis zu 30cm lang werden erscheinen erst ab Ende Mai</li>
+                <li>Die unauffälligen nach Honig duftenden Blüten bieten vielen Insekten eine wichtige Nahrungsquelle</li>
+                <li>Die ledrigen bis zu 30cm langen Samenschoten hängen bis in den Winter an dem Baum</li>
+                <li>Das Laub verfärbt sich im Herbst nur kurz grüngelb</li>
+              </ul>
+            </li>
+            <li>Widerstandskraft:
+              <ul>
+                <li>Keine besonderen Ansprüche an den Boden</li>
+                <li>Als typischer Flachwurzler ist sie anfällig für starken Wind</li>
+                <li>Benötigt einen vollsonnigen Standort, Hitze und Trockenheit verträgt sie gut, bei Frost und Wind ist sie anfällig</li>
+                <li>In der Regel frostfest, auf schweren feuchten Böden aber anfälliger für Frost</li>
+                <li>Kaum Befall durch Schädlinge oder Pilze</li>
+                <li>Robust gegenüber Abgasen und auch Hagel</li>
+                <li>Die dicke Wurzelhaut schützt den Baum sogar vor Streusalz</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="slide">
+          <h3>Europäische Hopfenbuche (Ostrya carpinifolia)</h3>
+          <ul>
+            <li>Herkunft:
+              <ul>
+                <li>Mittelmeergebiet</li>
+              </ul>
+            </li>
+            <li>Wuchs:
+              <ul>
+                <li>Bis zu 15m hoch</li>
+                <li>Weißgrauer Stamm und anfangs kegelförmige, später rundliche lockere Krone</li>
+                <li>Doppelt gesägte dunkelgrüne bis 10cm lange Blätter</li>
+                <li>Männliche gelbe Kätzchen und weibliche grüne Ähren bilden die Blütenstände</li>
+                <li>Im Herbst bilden sich 6cm lange Früchte, die den weiblichen Hopfenblüten ähneln</li>
+                <li>Das Laub verfärbt sich im Herbst gelb</li>
+              </ul>
+            </li>
+            <li>Widerstandskraft:
+              <ul>
+                <li>Keine besonderen Ansprüche an den Boden, er sollte auf keinen Fall staunass sein</li>
+                <li>Weitreichendes Herzwurzelsystem, gute Standsicherheit</li>
+                <li>Benötigt Sonne bis Halbschatten an einem möglichst geschützten Standort</li>
+                <li>Frosthart bis -25 Grad, Trockenheit und Stadtklima verträgt sie gut</li>
+                <li>Empfindlich gegenüber Pilzkrankheiten, zu trocken kultivierte Bäume werden vom Eichensplintkäfer befallen</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="slide">
+          <h3>Gemeine Robinie (Robinia pseudoacacia)</h3>
+          <ul>
+            <li>Herkunft:
+              <ul>
+                <li>Atlantisches Nordamerika</li>
+              </ul>
+            </li>
+            <li>Wuchs:
+              <ul>
+                <li>Bis zu 25m hoch</li>
+                <li>Graubrauner tief gefurchter Stamm und lockere schirmförmige Krone</li>
+                <li>Gefiederte bis zu 30cm lange frischgrüne Blätter</li>
+                <li>Die weißen Schmetterlingsblüten, die nach Bergamotte duften sitzen an bis zu 25cm langen Trauben</li>
+                <li>Die Blüten bilden eine reiche Insektenweide</li>
+                <li>Die Samen befinden sich im Herbst in graubraunen Schoten</li>
+                <li>Das Laub verfärbt sich im Herbst gelb</li>
+              </ul>
+            </li>
+            <li>Widerstandskraft:
+              <ul>
+                <li>Keine besonderen Ansprüche an den Boden, kommt auch mit kleinen Wurzelräumen zurecht</li>
+                <li>Sie kann als Tief- und Flachwurzler wachsen, je nach Bodengegebenheiten</li>
+                <li>Benötigt viel Sonne, wächst aber auch im Halbschatten, sehr robust gegen Wasser- und Nährstoffmangel</li>
+                <li>Winterhart, aber empfindlich bei Früh- und Spätfrösten</li>
+                <li>Resistent gegen die meisten Schädlinge</li>
+                <li>Streusalzverträglich</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="slide">
+          <h3>Japanischer Schnurbaum (Styphnolobium japonicum)</h3>
+          <ul>
+            <li>Herkunft:
+              <ul>
+                <li>Ostasien</li>
+              </ul>
+            </li>
+            <li>Wuchs:
+              <ul>
+                <li>Bis zu 30m hoch</li>
+                <li>Graubrauner kurzer Stamm und anfangs rundliche, später breit-ovale lockere Krone</li>
+                <li>Gefiederte bis zu 25cm lange filigrane Blätter</li>
+                <li>Gelblich weiße Schmetterlingsblüten, die in bis zu 25cm langen Rispen angeordnet sind, Blütezeit Juli-August</li>
+                <li>Die würzig duftenden Blüten werden von vielen Insekten als Nahrungsquelle angenommen</li>
+                <li>Die Früchte sind in längliche Schoten eingeschnürte Samen</li>
+                <li>Das Laub verfärbt sich im Herbst Goldgelb</li>
+              </ul>
+            </li>
+            <li>Widerstandskraft:
+              <ul>
+                <li>Trockene steinige Böden werden bevorzugt, verdichtete Böden werden nicht gut vertragen</li>
+                <li>Flachwurzler mit weitem Wurzelsystem, dadurch sehr windanfällig</li>
+                <li>Sonnige Standorte werden bevorzugt, äußerst robust gegenüber Trockenheit und Hitze</li>
+                <li>Junge Bäume frostempfindlich, später frosthart bis -25 Grad</li>
+                <li>Wird fast nie von Krankheiten oder Schädlingen befallen</li>
+                <li>Sehr beständig gegen Abgase, äußerst industriefest</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="slide">
+          <h3>Silber-Linde (Tilia tomentosa)</h3>
+          <ul>
+            <li>Herkunft:
+              <ul>
+                <li>Südosteuropa und Kleinasien</li>
+              </ul>
+            </li>
+            <li>Wuchs:
+              <ul>
+                <li>Bis zu 35m hoch</li>
+                <li>Graugrüner gerader Stamm und breitkegelige Krone mit steil nach oben gerichteten Ästen</li>
+                <li>Herzförmige charakteristische Blätter mit heller Unterseite</li>
+                <li>Die hängenden Blütenstände verströmen einen süßlichen Duft</li>
+                <li>Die späte Blüte im Juli bietet eine wertvolle Insektenweide</li>
+                <li>Die kleinen Nussfrüchte sind sehr unscheinbar, die Blätter verfärben sich im Herbst in ein schönes Goldgelb</li>
+              </ul>
+            </li>
+            <li>Widerstandskraft:
+              <ul>
+                <li>Tiefgründiger nährstoffreicher Boden wird bevorzugt</li>
+                <li>Tiefreichendes Pfahlwurzelsystem versorgt den Baum zuverlässig mit Wasser</li>
+                <li>Sonne bis Halbschatten, sehr trockenheitsresistent</li>
+                <li>Fosthart und widerstandsfähig gegenüber Abgasen und Staub</li>
+                <li>Keine Gefährdung durch Insekten oder Pilze</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="slide">
+          <h3>Japanische Zelkove (Zelkova serrata)</h3>
+          <ul>
+            <li>Herkunft:
+              <ul>
+                <li>Ostasien</li>
+              </ul>
+            </li>
+            <li>Wuchs:
+              <ul>
+                <li>Bis zu 30m hoch</li>
+                <li>Kurzer dicker Stamm und runde weit ausladende Krone, eher mehrstämmiges Wachstum</li>
+                <li>Ulmenähnliche bis zu 10cm lange scharfgezahnte hellgrüne Blätter</li>
+                <li>Unscheinbare Blüten und Früchte</li>
+                <li> Das Laub verfärbt sich im Herbst leuchtend Orange</li>
+              </ul>
+            </li>
+            <li>Widerstandskraft:
+              <ul>
+                <li>Keine besonderen Ansprüche an den Boden, aber empfindlich gegenüber Staunässe</li>
+                <li>Starkes weit reichendes Herzwurzelsystem, dadurch sehr sturmsicher</li>
+                <li>Keine besonderen Ansprüche an den Standort, Trockenheit und Hitze sind kein Problem</li>
+                <li>Absolut frosthart, Streusalz verträgt sie auch ohne Probleme</li>
+                <li>Wird von Schädlingen oder Pilzen kaum befallen</li>
+                <li>Absolut industriefest und tolerant gegenüber Abgasen</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+					<a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <div class="slideDots">
+					<span class="dot activeS" onclick="currentSlide(0)"></span>
+					<span class="dot" onclick="currentSlide(1)"></span>
+					<span class="dot" onclick="currentSlide(2)"></span>
+					<span class="dot" onclick="currentSlide(3)"></span>
+					<span class="dot" onclick="currentSlide(4)"></span>
+          <span class="dot" onclick="currentSlide(5)"></span>
+          <span class="dot" onclick="currentSlide(6)"></span>
+          <span class="dot" onclick="currentSlide(7)"></span>
+          <span class="dot" onclick="currentSlide(8)"></span>
+          <span class="dot" onclick="currentSlide(9)"></span>
+				</div>
       </div>
     </div>
   </div>
